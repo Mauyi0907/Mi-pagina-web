@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sitio web personal de Mauricio - Portafolio, blog y servicios desde Bogotá, Colombia">
+    <title>MAURICIO | Portafolio & Blog</title>
+    <!-- Tailwind CSS CDN (para que funcione sin instalar nada) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
+        
+        :root {
+            --tw-color-primary: #0ea5e9;
+        }
+        
+        .tail-container * {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
+        }
+        
+        .section-header {
+            font-family: 'Playfair Display', sans-serif;
+        }
+        
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #0ea5e9;
+            transform: translateY(-1px);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        .modal {
+            animation: modalPop 0.3s ease forwards;
+        }
+        
+        @keyframes modalPop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="tail-container">
+    <!-- NAVBAR -->
+    <nav class="bg-slate-950 text-white sticky top-0 z-50 border-b border-slate-800">
+        <div class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-sky-500 rounded-2xl flex items-center justify-center text-white font-bold text-xl">M</div>
+                <span class="font-semibold text-2xl tracking-tighter">MAURICIO</span>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#inicio" onclick="smoothScrollTo('inicio')" class="nav-link">Inicio</a>
+                <a href="#sobre-mi" onclick="smoothScrollTo('sobre-mi')" class="nav-link">Sobre mí</a>
+                <a href="#servicios" onclick="smoothScrollTo('servicios')" class="nav-link">Servicios</a>
+                <a href="#blog" onclick="smoothScrollTo('blog')" class="nav-link">Blog</a>
+                <a href="#galeria" onclick="smoothScrollTo('galeria')" class="nav-link">Galería</a>
+                <a href="#contacto" onclick="smoothScrollTo('contacto')" class="nav-link">Contacto</a>
+            </div>
+            
+            <!-- Botón mobile -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-2xl">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+            
+            <!-- Location badge -->
+            <div class="hidden md:flex items-center gap-2 text-xs bg-slate-900 px-4 py-2 rounded-3xl border border-slate-700">
+                <i class="fa-solid fa-location-dot text-sky-400"></i>
+                <span>Bogotá, Colombia</span>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-t border-slate-800 px-6 py-6">
+            <div class="flex flex-col gap-6 text-center text-lg">
+                <a href="#inicio" onclick="toggleMobileMenu();smoothScrollTo('inicio')" class="nav-link py-2">Inicio</a>
+                <a href="#sobre-mi" onclick="toggleMobileMenu();smoothScrollTo('sobre-mi')" class="nav-link py-2">Sobre mí</a>
+                <a href="#servicios" onclick="toggleMobileMenu();smoothScrollTo('servicios')" class="nav-link py-2">Servicios</a>
+                <a href="#blog" onclick="toggleMobileMenu();smoothScrollTo('blog')" class="nav-link py-2">Blog</a>
+                <a href="#galeria" onclick="toggleMobileMenu();smoothScrollTo('galeria')" class="nav-link py-2">Galería</a>
+                <a href="#contacto" onclick="toggleMobileMenu();smoothScrollTo('contacto')" class="nav-link py-2">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO / PÁGINA DE INICIO -->
+    <section id="inicio" class="hero-bg text-white py-24 md:py-32">
+        <div class="max-w-screen-2xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 bg-white/10 text-white text-sm font-medium px-6 py-3 rounded-3xl backdrop-blur-md">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                    </span>
+                    Bogotá, Colombia • Disponible para proyectos
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl font-bold tracking-tighter section-header leading-none">
+                    Hola, soy<br>MAURICIO
+                </h1>
+                
+                <p class="text-2xl text-slate-300 max-w-lg">
+                    Bienvenido a mi espacio digital. Aquí encontrarás mi portafolio, artículos, proyectos y la forma más fácil de contactarme.
+                </p>
+                
+                <div class="flex items-center gap-4">
+                    <a href="#contacto" onclick="smoothScrollTo('contacto')" 
+                       class="bg-sky-500 hover:bg-sky-600 px-8 py-4 rounded-3xl font-semibold flex items-center gap-3 transition-all">
+                        <span>Empecemos un proyecto</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    
+                    <a href="#galeria" onclick="smoothScrollTo('galeria')" 
+                       class="border border-white/60 hover:border-white/90 px-8 py-4 rounded-3xl font-medium flex items-center gap-3 transition-all">
+                        Ver mis proyectos
+                    </a>
+                </div>
+                
+                <div class="flex items-center gap-8 text-sm">
+                    <div>
+                        <span class="block text-4xl font-semibold text-sky-400">15+</span>
+                        <span class="text-slate-400">Proyectos completados</span>
+                    </div>
+                    <div>
+                        <span class="block text-4xl font-semibold text-sky-400">8</span>
+                        <span class="text-slate-400">Artículos publicados</span>
+                    </div>
+                    <div>
+                        <span class="block text-4xl font-semibold text-sky-400">100%</span>
+                        <span class="text-slate-400">Satisfacción clientes</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Imagen hero -->
+            <div class="relative">
+                <div class="aspect-square md:aspect-auto md:h-[520px] bg-slate-800 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                    <img src="images/foto-perfil.jpeg" alt="Foto de Mauricio" 
+     class="w-full rounded-3xl shadow-2xl">
+                    <div class="absolute bottom-8 left-8 bg-black/70 backdrop-blur-md text-white px-6 py-4 rounded-3xl flex items-center gap-4">
+                        <i class="fa-solid fa-camera text-3xl text-amber-400"></i>
+                        <div>
+                            <p class="font-medium">Fotógrafo &amp; Desarrollador</p>
+                            <p class="text-xs text-slate-400">Capturando momentos • Creando experiencias digitales</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Decorative badge -->
+                <div class="absolute -top-6 -right-6 bg-white text-slate-900 text-sm font-bold px-6 py-2 rounded-3xl shadow-xl flex items-center gap-2 rotate-12">
+                    <i class="fa-solid fa-medal"></i>
+                    ¡QUE VIVA COLOMBIA!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE MÍ / NOSOTROS -->
+    <section id="sobre-mi" class="py-20 bg-white">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-5/12">
+                    <img src="images/foto-perfil.jpeg" alt="Foto de Mauricio" 
+     class="w-full rounded-3xl shadow-2xl">
+                </div>
+                
+                <div class="lg:w-7/12 space-y-8">
+                    <div class="uppercase text-sky-500 text-sm font-semibold tracking-widest">Conóceme</div>
+                    <h2 class="text-5xl font-bold section-header tracking-tighter">Sobre mí</h2>
+                    
+                    <div class="prose text-lg text-slate-600">
+                        <p>Hola, soy Mauricio, creador digital y desarrollador web con base en Bogotá, Colombia. Con más de 2 años de experiencia, combino mi pasión por la tecnología y la fotografía para ayudar a personas y empresas a destacar en internet.</p>
+                        <p>Mi enfoque es simple: crear experiencias digitales hermosas, funcionales y que realmente conecten con las personas. Cuando no estoy programando, estoy recorriendo las calles de Bogotá capturando momentos únicos con mi cámara.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-6 text-center">
+                        <div class="border border-slate-200 p-6 rounded-3xl">
+                            <i class="fa-solid fa-code text-4xl text-sky-500 mb-3"></i>
+                            <p class="font-semibold">Desarrollo Web</p>
+                            <p class="text-sm text-slate-500">React • Tailwind • Next.js</p>
+                        </div>
+                        <div class="border border-slate-200 p-6 rounded-3xl">
+                            <i class="fa-solid fa-camera text-4xl text-sky-500 mb-3"></i>
+                            <p class="font-semibold">Fotografía</p>
+                            <p class="text-sm text-slate-500">Urbana • Retrato • Eventos</p>
+                        </div>
+                        <div class="border border-slate-200 p-6 rounded-3xl">
+                            <i class="fa-solid fa-chalkboard-teacher text-4xl text-sky-500 mb-3"></i>
+                            <p class="font-semibold">Mentoría</p>
+                            <p class="text-sm text-slate-500">Talleres de diseño web</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-slate-500 text-sm">
+                        <!-- REEMPLAZA CON TU BIOGRAFÍA REAL AQUÍ -->
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS / PRODUCTOS -->
+    <section id="servicios" class="py-20 bg-slate-50">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="uppercase text-sky-500 text-sm font-semibold tracking-widest mb-3">Qué ofrezco</div>
+                <h2 class="text-5xl font-bold section-header tracking-tighter">Servicios y Productos</h2>
+                <p class="mt-4 text-slate-600 max-w-md mx-auto">Desde sitios web modernos hasta sesiones fotográficas únicas. Todo hecho con pasión desde Bogotá.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Servicio 1 -->
+                <div class="bg-white rounded-3xl p-8 card-hover border border-transparent hover:border-sky-200">
+                    <div class="h-12 w-12 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-3xl mb-6">💻</div>
+                    <h3 class="font-semibold text-2xl mb-2">Desarrollo Web</h3>
+                    <p class="text-slate-600 mb-8">Sitios web modernos, landing pages y tiendas en línea. 100% personalizados y optimizados para móviles.</p>
+                    <div class="text-sm font-medium flex items-center gap-2 text-sky-500">
+                        Desde $800 USD <span class="text-slate-400">• 4-6 semanas</span>
+                    </div>
+                </div>
+                
+                <!-- Servicio 2 -->
+                <div class="bg-white rounded-3xl p-8 card-hover border border-transparent hover:border-sky-200">
+                    <div class="h-12 w-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-3xl mb-6">📸</div>
+                    <h3 class="font-semibold text-2xl mb-2">Sesiones Fotográficas</h3>
+                    <p class="text-slate-600 mb-8">Fotografía urbana, retratos corporativos, eventos y productos. Capturo la esencia de Bogotá.</p>
+                    <div class="text-sm font-medium flex items-center gap-2 text-sky-500">
+                        Desde $250 USD <span class="text-slate-400">• 2 horas</span>
+                    </div>
+                </div>
+                
+                <!-- Servicio 3 -->
+                <div class="bg-white rounded-3xl p-8 card-hover border border-transparent hover:border-sky-200">
+                    <div class="h-12 w-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-6">🎨</div>
+                    <h3 class="font-semibold text-2xl mb-2">Diseño Gráfico &amp; Branding</h3>
+                    <p class="text-slate-600 mb-8">Logotipos, identidades visuales y materiales de marketing que hacen que tu marca destaque.</p>
+                    <div class="text-sm font-medium flex items-center gap-2 text-sky-500">
+                        Desde $450 USD <span class="text-slate-400">• Entrega en 10 días</span>
+                    </div>
+                </div>
+                
+                <!-- Producto digital (ejemplo de e-commerce) -->
+                <div class="bg-white rounded-3xl p-8 card-hover border border-transparent hover:border-sky-200 relative">
+                    <div class="absolute top-8 right-8 text-xs font-bold bg-emerald-500 text-white px-4 py-1 rounded-3xl">DIGITAL</div>
+                    <div class="h-12 w-12 bg-violet-100 text-violet-600 rounded-2xl flex items-center justify-center text-3xl mb-6">📦</div>
+                    <h3 class="font-semibold text-2xl mb-2">Plantillas Web Premium</h3>
+                    <p class="text-slate-600 mb-8">Plantillas listas para usar en Tailwind + HTML. Perfectas para freelancers como tú.</p>
+                    <div class="text-sm font-medium flex items-center gap-2 text-sky-500">
+                        $49 USD cada una
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG / ARTÍCULOS -->
+    <section id="blog" class="py-20 bg-white">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <div class="uppercase text-sky-500 text-sm font-semibold tracking-widest">Mi Blog</div>
+                    <h2 class="text-5xl font-bold section-header tracking-tighter">Artículos y reflexiones</h2>
+                </div>
+                <a href="#" onclick="alert('En una versión completa abriría el archivo de blog completo')" 
+                   class="hidden md:flex items-center gap-3 text-sky-600 hover:text-sky-700 font-medium">
+                    Ver todos los artículos 
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Post 1 -->
+                <div onclick="showBlogModal(1)" class="cursor-pointer bg-white border border-slate-100 rounded-3xl overflow-hidden card-hover">
+                    <img src="https://picsum.photos/id/1016/600/400" alt="Blog 1" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <div class="text-xs text-slate-400 mb-3">29 MAR 2026 • DESARROLLO WEB</div>
+                        <h3 class="font-semibold text-xl leading-tight mb-3">Cómo crear un sitio web profesional en menos de 1 hora con Tailwind</h3>
+                        <p class="text-slate-600 line-clamp-3">En este artículo te muestro el mismo código que usé para este sitio y cómo puedes personalizarlo tú mismo.</p>
+                    </div>
+                </div>
+                
+                <!-- Post 2 -->
+                <div onclick="showBlogModal(2)" class="cursor-pointer bg-white border border-slate-100 rounded-3xl overflow-hidden card-hover">
+                    <img src="https://picsum.photos/id/133/600/400" alt="Blog 2" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <div class="text-xs text-slate-400 mb-3">15 MAR 2026 • FOTOGRAFÍA</div>
+                        <h3 class="font-semibold text-xl leading-tight mb-3">Los 7 mejores spots para fotografiar Bogotá al atardecer</h3>
+                        <p class="text-slate-600 line-clamp-3">Desde Monserrate hasta el barrio La Candelaria, estos lugares te van a inspirar.</p>
+                    </div>
+                </div>
+                
+                <!-- Post 3 -->
+                <div onclick="showBlogModal(3)" class="cursor-pointer bg-white border border-slate-100 rounded-3xl overflow-hidden card-hover">
+                    <img src="https://picsum.photos/id/201/600/400" alt="Blog 3" class="w-full h-48 object-cover">
+                    <div class="p-8">
+                        <div class="text-xs text-slate-400 mb-3">02 MAR 2026 • EMPRENDIMIENTO</div>
+                        <h3 class="font-semibold text-xl leading-tight mb-3">Cómo conseguir tus primeros clientes como freelancer en Colombia</h3>
+                        <p class="text-slate-600 line-clamp-3">Estrategias reales que me ayudaron a facturar mi primer $10k USD desde casa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERÍA DE IMÁGENES / PROYECTOS -->
+    <section id="galeria" class="py-20 bg-slate-950 text-white">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="uppercase text-sky-400 text-sm font-semibold tracking-widest mb-3">Mi trabajo</div>
+                <h2 class="text-5xl font-bold section-header tracking-tighter text-white">Galería de proyectos y fotos</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div onclick="showImageModal('https://picsum.photos/id/1015/1200/800')" class="aspect-square rounded-3xl overflow-hidden cursor-pointer">
+                    <img src="https://picsum.photos/id/1015/600/600" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div onclick="showImageModal('https://picsum.photos/id/133/1200/800')" class="aspect-square rounded-3xl overflow-hidden cursor-pointer">
+                    <img src="https://picsum.photos/id/133/600/600" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div onclick="showImageModal('https://picsum.photos/id/160/1200/800')" class="aspect-square rounded-3xl overflow-hidden cursor-pointer">
+                    <img src="https://picsum.photos/id/160/600/600" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div onclick="showImageModal('https://picsum.photos/id/201/1200/800')" class="aspect-square rounded-3xl overflow-hidden cursor-pointer">
+                    <img src="https://picsum.photos/id/201/600/600" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div onclick="showImageModal('https://picsum.photos/id/251/1200/800')" class="aspect-square rounded-3xl overflow-hidden cursor-pointer">
+                    <img src="https://picsum.photos/id/251/600/600" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div onclick="showImageModal('https://picsum.photos/id/1005/1200/800')" class="aspect-square rounded-3xl overflow-hidden cursor-pointer">
+                    <img src="https://picsum.photos/id/1005/600/600" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div onclick="showImageModal('https://picsum.photos/id/29/1200/800')" class="aspect-square rounded-3xl overflow-hidden cursor-pointer">
+                    <img src="https://picsum.photos/id/29/600/600" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div onclick="showImageModal('https://picsum.photos/id/870/1200/800')" class="aspect-square rounded-3xl overflow-hidden cursor-pointer">
+                    <img src="https://picsum.photos/id/870/600/600" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+            </div>
+            
+            <p class="text-center text-slate-400 text-sm mt-8">Haz clic en cualquier imagen para verla en grande • Todas tomadas o diseñadas por mí</p>
+        </div>
+    </section>
+
+    <!-- FORMULARIO DE CONTACTO -->
+    <section id="contacto" class="py-20 bg-white">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16">
+                <div class="md:col-span-5">
+                    <div class="sticky top-28">
+                        <h2 class="text-5xl font-bold section-header tracking-tighter">Hablemos</h2>
+                        <p class="mt-6 text-slate-600 text-lg">¿Tienes un proyecto, una idea o simplemente quieres saludar? Estoy a solo un mensaje de distancia.</p>
+                        
+                        <div class="mt-12 space-y-6">
+                            <div class="flex gap-4">
+                                <i class="fa-solid fa-envelope text-2xl text-sky-500 mt-1"></i>
+                                <div>
+                                    <p class="font-medium">Email</p>
+                                    <a href="mailto:tu@email.com" class="text-slate-600 hover:text-sky-600">tu@email.com</a> <!-- REEMPLAZA CON TU EMAIL REAL -->
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <i class="fa-solid fa-phone text-2xl text-sky-500 mt-1"></i>
+                                <div>
+                                    <p class="font-medium">WhatsApp / Teléfono</p>
+                                    <a href="https://wa.me/573001234567" target="_blank" class="text-slate-600 hover:text-sky-600">+57 300 1234567</a> <!-- REEMPLAZA CON TU NÚMERO -->
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <i class="fa-brands fa-instagram text-2xl text-sky-500 mt-1"></i>
+                                <div>
+                                    <p class="font-medium">Instagram</p>
+                                    <a href="https://instagram.com/tuusuario" target="_blank" class="text-slate-600 hover:text-sky-600">@tuusuario</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulario -->
+                <div class="md:col-span-7 bg-slate-50 rounded-3xl p-8 md:p-12">
+                    <form id="contact-form" onsubmit="handleSubmit(event)" class="space-y-8">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-500 mb-2">Tu nombre</label>
+                                <input type="text" id="name" required
+                                       class="w-full px-6 py-4 rounded-3xl border border-slate-200 focus:border-sky-300 outline-none text-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-500 mb-2">Correo electrónico</label>
+                                <input type="email" id="email" required
+                                       class="w-full px-6 py-4 rounded-3xl border border-slate-200 focus:border-sky-300 outline-none text-lg">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-slate-500 mb-2">Mensaje</label>
+                            <textarea id="message" rows="6" required
+                                      class="w-full px-6 py-4 rounded-3xl border border-slate-200 focus:border-sky-300 outline-none text-lg resize-y"></textarea>
+                        </div>
+                        
+                        <button type="submit"
+                                class="w-full bg-slate-900 hover:bg-black text-white py-6 rounded-3xl font-semibold text-lg flex items-center justify-center gap-3 transition-all">
+                            <span>Enviar mensaje</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                        
+                        <p class="text-center text-xs text-slate-400">Tu información está segura. Responderé en menos de 24 horas.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-white py-16">
+        <div class="max-w-screen-2xl mx-auto px-6 text-center">
+            <div class="flex justify-center gap-8 text-3xl mb-8">
+                <a href="#" class="hover:text-sky-400"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-sky-400"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" class="hover:text-sky-400"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <p class="text-slate-400">© 2026 Mauricio • Hecho con ❤️ en Bogotá, Colombia</p>
+            <p class="text-xs text-slate-500 mt-8">Este sitio es 100% tuyo. Copia, modifica y publícalo donde quieras (Netlify, Vercel, GitHub Pages... ¡gratis!)</p>
+        </div>
+    </footer>
+
+    <!-- MODAL PARA POSTS DEL BLOG -->
+    <div id="blog-modal" onclick="if(event.target.id === 'blog-modal') hideBlogModal()" 
+         class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="modal bg-white text-slate-900 max-w-2xl w-full mx-4 rounded-3xl max-h-[90vh] overflow-auto">
+            <div id="modal-content" class="p-10"></div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA IMÁGENES -->
+    <div id="image-modal" onclick="if(event.target.id === 'image-modal') hideImageModal()" 
+         class="hidden fixed inset-0 bg-black/90 flex items-center justify-center z-[9999]">
+        <div class="relative max-w-5xl w-full mx-4">
+            <button onclick="hideImageModal()" class="absolute -top-12 right-0 text-white text-4xl">✕</button>
+            <img id="modal-image" src="" class="w-full rounded-3xl shadow-2xl">
+        </div>
+    </div>
+
+    <script>
+        // Configuración Tailwind
+        function initializeTailwind() {
+            return {
+                config(userConfig = {}) {
+                    return {
+                        content: [],
+                        theme: {
+                            extend: {},
+                        },
+                        plugins: [],
+                        ...userConfig,
+                    }
+                },
+                theme: {
+                    extend: {},
+                },
+            }
+        }
+        
+        // Smooth scroll
+        function smoothScrollTo(id) {
+            const element = document.getElementById(id)
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' })
+            }
+        }
+        
+        // Mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu')
+            const icon = document.getElementById('menu-icon')
+            menu.classList.toggle('hidden')
+            
+            if (!menu.classList.contains('hidden')) {
+                icon.classList.replace('fa-bars', 'fa-xmark')
+            } else {
+                icon.classList.replace('fa-xmark', 'fa-bars')
+            }
+        }
+        
+        // Blog modal
+        function showBlogModal(postId) {
+            const modal = document.getElementById('blog-modal')
+            const content = document.getElementById('modal-content')
+            
+            let html = ''
+            
+            if (postId === 1) {
+                html = `
+                    <h2 class="text-4xl font-bold mb-6">Cómo crear un sitio web profesional en menos de 1 hora con Tailwind</h2>
+                    <p class="text-slate-500 mb-8">Publicado el 29 de marzo de 2026</p>
+                    <div class="prose prose-lg">
+                        <p>¡Exacto! El código que estás viendo ahora mismo es el mismo que puedes usar tú. Solo copia, pega y reemplaza los textos con tu información.</p>
+                        <h3 class="text-2xl font-semibold mt-10">Pasos rápidos:</h3>
+                        <ol class="list-decimal pl-6 space-y-4">
+                            <li>Guarda este archivo como <strong>index.html</strong></li>
+                            <li>Abre en tu navegador</li>
+                            <li>Reemplaza las imágenes y textos</li>
+                            <li>Sube a Netlify o Vercel en 2 clics</li>
+                        </ol>
+                    </div>
+                    <button onclick="hideBlogModal()" class="mt-10 px-8 py-4 border border-slate-300 rounded-3xl font-medium">Cerrar</button>
+                `
+            } else if (postId === 2) {
+                html = `
+                    <h2 class="text-4xl font-bold mb-6">Los 7 mejores spots para fotografiar Bogotá al atardecer</h2>
+                    <p class="text-slate-500 mb-8">Publicado el 15 de marzo de 2026</p>
+                    <div class="prose prose-lg">
+                        <p>Desde la cima de Monserrate hasta los grafitis del barrio La Candelaria, Bogotá ofrece luces mágicas al final del día.</p>
+                        <p>En este artículo comparto los lugares, la mejor hora y algunos tips de equipo que uso.</p>
+                    </div>
+                    <button onclick="hideBlogModal()" class="mt-10 px-8 py-4 border border-slate-300 rounded-3xl font-medium">Cerrar</button>
+                `
+            } else {
+                html = `
+                    <h2 class="text-4xl font-bold mb-6">Cómo conseguir tus primeros clientes como freelancer en Colombia</h2>
+                    <p class="text-slate-500 mb-8">Publicado el 2 de marzo de 2026</p>
+                    <div class="prose prose-lg">
+                        <p>Mi experiencia real: de cero a facturar $10.000 USD en menos de 8 meses trabajando desde mi apartamento en Bogotá.</p>
+                        <p>Te cuento las plataformas que funcionaron, cómo hacer propuestas y cómo cobrar en dólares.</p>
+                    </div>
+                    <button onclick="hideBlogModal()" class="mt-10 px-8 py-4 border border-slate-300 rounded-3xl font-medium">Cerrar</button>
+                `
+            }
+            
+            content.innerHTML = html
+            modal.classList.remove('hidden')
+            modal.classList.add('flex')
+        }
+        
+        function hideBlogModal() {
+            const modal = document.getElementById('blog-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        // Image modal
+        function showImageModal(src) {
+            const modal = document.getElementById('image-modal')
+            const img = document.getElementById('modal-image')
+            img.src = src
+            modal.classList.remove('hidden')
+            modal.classList.add('flex')
+        }
+        
+        function hideImageModal() {
+            const modal = document.getElementById('image-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        // Formulario demo
+        function handleSubmit(e) {
+            e.preventDefault()
+            
+            const name = document.getElementById('name').value
+            alert(`¡Gracias ${name}! Tu mensaje ha sido enviado (esto es una demo). En una versión real llegaría a tu correo.`)
+            
+            // Reset form
+            document.getElementById('contact-form').reset()
+        }
+        
+        // Inicializar todo
+        window.onload = function() {
+            initializeTailwind()
+            console.log('%c✅ Sitio web de Mauricio cargado correctamente. ¡Listo para personalizar!', 'color:#0ea5e9; font-family:monospace')
+        }
+    </script>
+</body>
+</html>
